@@ -12,7 +12,8 @@ public class VentanaSemestre extends javax.swing.JFrame {
     private DefaultListModel<String> nombreMaterias = new DefaultListModel<>();
     private DefaultListModel<String> promedios = new DefaultListModel<>(); 
     private DefaultListModel<String> creditos = new DefaultListModel<>(); 
-    private VentanaNuevaMateria ventanaNuevaMateria;  
+    private VentanaNuevaMateria ventanaNuevaMateria; 
+    private VentanaMateria ventanaMateria;
     private Semestre semestre = new Semestre(); 
     
     public VentanaSemestre(Semestre semestre) {
@@ -214,6 +215,11 @@ public class VentanaSemestre extends javax.swing.JFrame {
         jListMateria.setBorder(null);
         jListMateria.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
         jListMateria.setForeground(new java.awt.Color(204, 204, 204));
+        jListMateria.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListMateriaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListMateria);
 
         jLabel4.setFont(new java.awt.Font("SF UI Display", 0, 24)); // NOI18N
@@ -361,6 +367,15 @@ public class VentanaSemestre extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnNuevaMateriaActionPerformed
+
+    private void jListMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMateriaMouseClicked
+        int indice = jListMateria.getSelectedIndex();
+        Materia SelectMateria = semestre.getMaterias().getElementAt(indice); 
+        
+        
+        ventanaMateria = new VentanaMateria(SelectMateria); 
+        ventanaMateria.setVisible(true);
+    }//GEN-LAST:event_jListMateriaMouseClicked
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

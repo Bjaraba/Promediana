@@ -1,20 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package GUI;
 
 /**
  *
  * @author brayan
  */
-public class VentanaNota extends javax.swing.JFrame {
+import javax.swing.DefaultListModel;
+import promedianainterfaz.Materia; 
+public class VentanaMateria extends javax.swing.JFrame {
+    //modelos de las notas
+    DefaultListModel<String> nombre = new DefaultListModel<>(); 
+    DefaultListModel<String> porcentaje = new DefaultListModel<>(); 
+    DefaultListModel<String> calificacion = new DefaultListModel<>(); 
+    
 
-    /**
-     * Creates new form VentanaNota
-     */
-    public VentanaNota() {
+    // constructor 
+    public VentanaMateria(Materia materia) {
         initComponents();
+        lblNombreMateria.setText(materia.getNombre());
+        
+        llenarModelos(materia);
+        
+        // se relacionan las listas con los modelos
+        jListNombreNota.setModel(nombre);
+        jListPorcentaje.setModel(porcentaje);
+        jListCalificacion.setModel(calificacion);
+        
+        String promedioMateria = String.valueOf(materia.getPromedio()); 
+    }
+    
+    public void llenarModelos (Materia materia) {
+        if (materia.getNotas().getSize() != 0) {
+            
+            for (int i = 0; i < materia.getNotas().getSize(); i++){
+                
+                // nombre
+                String nombre = materia.getNotas().getElementAt(i).getNombre(); 
+                this.nombre.addElement(nombre);
+                
+                // porcentaje
+                String porcentaje = String.valueOf((materia.getNotas().getElementAt(i).getPorcentaje()) * 100); 
+                this.porcentaje.addElement(porcentaje);
+                
+                // calificacion 
+                String calificacion = String.valueOf(materia.getNotas().getElementAt(i).getCalificacion()); 
+                this.calificacion.addElement(calificacion); 
+            } 
+        }
     }
 
     /**
