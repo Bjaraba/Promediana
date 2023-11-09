@@ -6,24 +6,23 @@ package GUI;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import promedianainterfaz.Materia; 
-import promedianainterfaz.Nota; 
+import promedianainterfaz.Materia;
+import promedianainterfaz.Nota;
+import promedianainterfaz.Semestre;
 
 /**
  *
  * @author brayan
  */
 public class VentanaNuevaMateria extends javax.swing.JFrame {
-    private double limiteInferior;
-    private double limiteSuperior; 
-    private DefaultListModel<Nota> notas; 
-            
-    public VentanaNuevaMateria(double limiteInferior, double limiteSuperior) {
+    
+    private VentanaSemestre ventanaSemestre;
+    private Semestre semestre = new Semestre();
+
+    public VentanaNuevaMateria(Semestre semestre) {
         initComponents();
-        this.limiteInferior = limiteInferior; 
-        this.limiteSuperior = limiteSuperior; 
-        notas = new DefaultListModel<>(); 
-                
+
+        this.semestre = semestre; 
     }
 
     /**
@@ -38,7 +37,7 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSiguiente = new javax.swing.JButton();
         txtCreditosNuevaMateria = new javax.swing.JTextField();
         txtNombreNuevaMateria = new javax.swing.JTextField();
 
@@ -57,16 +56,16 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         jLabel2.setText("Creditos de la Materia");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        jButton1.setBackground(new java.awt.Color(68, 68, 68));
-        jButton1.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(204, 204, 204));
-        jButton1.setText("Siguiente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSiguiente.setBackground(new java.awt.Color(68, 68, 68));
+        btnSiguiente.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(204, 204, 204));
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
 
         txtCreditosNuevaMateria.setBackground(new java.awt.Color(68, 68, 68));
         txtCreditosNuevaMateria.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
@@ -101,26 +100,32 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreNuevaMateriaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         if (txtCreditosNuevaMateria.getText().equalsIgnoreCase("") || txtNombreNuevaMateria.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Ups! se te olvido llenar algo");
         } else {
             try {
                 // Modelo de materias vacio
-                DefaultListModel<Nota> materias = new DefaultListModel<>(); 
-                int creditos = Integer.parseInt(txtCreditosNuevaMateria.getText()); 
+                DefaultListModel<Nota> notas = new DefaultListModel<>();
+                int creditos = Integer.parseInt(txtCreditosNuevaMateria.getText());
                 Materia nuevaMateria = new Materia(txtNombreNuevaMateria.getText(), creditos, notas);
+
+                //logica 
+                ventanaSemestre = new VentanaSemestre(nuevaMateria, semestre);
+
                 this.dispose();
-                
+                ventanaSemestre.setVisible(true);
+                ventanaSemestre.setLocationRelativeTo(null);
+
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(rootPane, "ups! Ingresaste un dato invalido");
             }
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

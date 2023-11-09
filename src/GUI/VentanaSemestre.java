@@ -12,25 +12,43 @@ public class VentanaSemestre extends javax.swing.JFrame {
     private DefaultListModel<String> nombreMaterias = new DefaultListModel<>();
     private DefaultListModel<String> promedios = new DefaultListModel<>(); 
     private DefaultListModel<String> creditos = new DefaultListModel<>(); 
-    private Semestre semestre; 
     private VentanaNuevaMateria ventanaNuevaMateria;  
+    private Semestre semestre = new Semestre(); 
     
     public VentanaSemestre(Semestre semestre) {
         initComponents();
+        this.semestre = semestre; 
         
         txtLimiteInferior.setText(String.valueOf(semestre.getLimiteInferior())); //se toman los limites superiores y los limites inferiores
         txtLimiteSuperior.setText(String.valueOf(semestre.getLimiteSuperior()));
         
-        ventanaNuevaMateria = new VentanaNuevaMateria(semestre.getLimiteInferior(), semestre.getLimiteSuperior()); 
+        ventanaNuevaMateria = new VentanaNuevaMateria(semestre); 
         
         llenarModelos(semestre.getMaterias());
+        
+        jListCreditos.setModel(creditos);
+        jListMateria.setModel(nombreMaterias);
+        jListPromedios.setModel(promedios);
     }
     
     // segundo contructor de tal manera que esta ventana se pueda comunicar con la ventana de ingreso
-    public VentanaSemestre(Materia materia) {
-        initComponents();
-        semestre.getMaterias().addElement(materia);
-        llenarModelos(semestre.getMaterias());
+    public VentanaSemestre(Materia materia, Semestre semestre) {
+        initComponents(); 
+        this.semestre = semestre;
+        
+        //se modifican los limites de calificacion
+        txtLimiteInferior.setText(String.valueOf(semestre.getLimiteInferior()));
+        txtLimiteSuperior.setText(String.valueOf(semestre.getLimiteSuperior()));
+        
+        this.semestre.getMaterias().addElement(materia);
+        nombreMaterias.addElement(materia.getNombre()); // nombre
+        promedios.addElement(String.valueOf(materia.getPromedio())); //promedio
+        creditos.addElement(String.valueOf(materia.getCreditos()));  // creditos
+        
+        
+        jListCreditos.setModel(creditos);
+        jListMateria.setModel(nombreMaterias);
+        jListPromedios.setModel(promedios);
     }
     
     //servira para que tomar todos los elementos del array de materias e ingresarlos en los modelos
@@ -59,6 +77,11 @@ public class VentanaSemestre extends javax.swing.JFrame {
         }
     }
 
+    
+    //obtener el semestre por fuera de la clase
+    public Semestre getSemestre(){
+        return semestre; 
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -330,8 +353,12 @@ public class VentanaSemestre extends javax.swing.JFrame {
         if (txtLimiteInferior.getText().equalsIgnoreCase("") || txtLimiteSuperior.getText().equalsIgnoreCase("")) {
             JOptionPane.showMessageDialog(rootPane, "Debes Ingresar los limites de calificacion");
         } else {
+            
+            ventanaNuevaMateria = new VentanaNuevaMateria(semestre); 
+            
             ventanaNuevaMateria.setVisible(true);
-            ventanaNuevaMateria.setLocationRelativeTo(this);
+            ventanaNuevaMateria.setLocationRelativeTo(null);
+            this.dispose();
         }
     }//GEN-LAST:event_btnNuevaMateriaActionPerformed
 

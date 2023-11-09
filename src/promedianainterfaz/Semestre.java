@@ -18,6 +18,8 @@ public class Semestre {
         this.materias = materias; 
         
     }
+    
+    public Semestre(){}; 
 
    
     public double getLimiteSuperior() {
