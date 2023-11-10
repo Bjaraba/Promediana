@@ -4,14 +4,11 @@
  */
 package GUI;
 
-import java.awt.Color;
 import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import promedianainterfaz.Materia;
 import promedianainterfaz.Nota;
 import promedianainterfaz.Semestre;
-import java.awt.geom.RoundRectangle2D;
 
 /**
  *
