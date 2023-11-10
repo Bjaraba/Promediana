@@ -370,11 +370,14 @@ public class VentanaSemestre extends javax.swing.JFrame {
 
     private void jListMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMateriaMouseClicked
         int indice = jListMateria.getSelectedIndex();
-        Materia SelectMateria = semestre.getMaterias().getElementAt(indice); 
         
-        
-        ventanaMateria = new VentanaMateria(SelectMateria); 
+        //contructor y hacer visible
+        ventanaMateria = new VentanaMateria(semestre, indice); 
         ventanaMateria.setVisible(true);
+        ventanaMateria.setLocationRelativeTo(null);
+        
+        //hacer invicible la ventana principal
+        this.dispose();
     }//GEN-LAST:event_jListMateriaMouseClicked
 
    

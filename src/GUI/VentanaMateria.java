@@ -6,26 +6,40 @@ package GUI;
  */
 import javax.swing.DefaultListModel;
 import promedianainterfaz.Materia; 
+import promedianainterfaz.Semestre; 
+
 public class VentanaMateria extends javax.swing.JFrame {
     //modelos de las notas
-    DefaultListModel<String> nombre = new DefaultListModel<>(); 
-    DefaultListModel<String> porcentaje = new DefaultListModel<>(); 
-    DefaultListModel<String> calificacion = new DefaultListModel<>(); 
+    private DefaultListModel<String> nombre = new DefaultListModel<>(); 
+    private DefaultListModel<String> porcentaje = new DefaultListModel<>(); 
+    private DefaultListModel<String> calificacion = new DefaultListModel<>();
     
+    //coneccion con la ventana de nueva nota
+    private int indexMateria; 
+    private Semestre semestre = new Semestre(); // semestre vacio; 
 
     // constructor 
-    public VentanaMateria(Materia materia) {
+    public VentanaMateria(Semestre semestre, int indexMateria) {
         initComponents();
-        lblNombreMateria.setText(materia.getNombre());
         
-        llenarModelos(materia);
+        //se cambia el semestre vacio por el pasado como parametro
+        this.semestre = semestre; 
+        
+        this.indexMateria = indexMateria; 
+        
+        //se obtiene la materia en el indice seleccionado 
+        Materia selectMateria = semestre.getMaterias().getElementAt(indexMateria);
+        
+        // se configura la etiqueta con el nombre de la materia 
+        lblNombreMateria.setText(selectMateria.getNombre());
         
         // se relacionan las listas con los modelos
         jListNombreNota.setModel(nombre);
         jListPorcentaje.setModel(porcentaje);
         jListCalificacion.setModel(calificacion);
         
-        String promedioMateria = String.valueOf(materia.getPromedio()); 
+        // se saca el promedio de la materia para mostralo en la etiqueta
+        String promedioMateria = String.valueOf(selectMateria.getPromedio()); 
     }
     
     public void llenarModelos (Materia materia) {
@@ -212,6 +226,11 @@ public class VentanaMateria extends javax.swing.JFrame {
         btnNuevo.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(51, 51, 51));
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 540, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
@@ -236,6 +255,14 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria); 
+        ventanaNuevaNota.setVisible(true);
+        ventanaNuevaNota.setLocationRelativeTo(null);
+        
+        this.dispose();
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
