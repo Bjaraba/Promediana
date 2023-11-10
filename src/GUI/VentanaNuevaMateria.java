@@ -46,47 +46,47 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(112, 129, 148));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Nombre de la Materia");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("Creditos de la Materia");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, -1, -1));
 
-        btnSiguiente.setBackground(new java.awt.Color(68, 68, 68));
-        btnSiguiente.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
-        btnSiguiente.setForeground(new java.awt.Color(204, 204, 204));
+        btnSiguiente.setBackground(new java.awt.Color(200, 216, 231));
+        btnSiguiente.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnSiguiente.setForeground(new java.awt.Color(51, 51, 51));
         btnSiguiente.setText("Siguiente");
         btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSiguienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
+        jPanel1.add(btnSiguiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
         txtCreditosNuevaMateria.setBackground(new java.awt.Color(68, 68, 68));
-        txtCreditosNuevaMateria.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        txtCreditosNuevaMateria.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         txtCreditosNuevaMateria.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(txtCreditosNuevaMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 210, 30));
+        jPanel1.add(txtCreditosNuevaMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 260, 30));
 
         txtNombreNuevaMateria.setBackground(new java.awt.Color(68, 68, 68));
-        txtNombreNuevaMateria.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        txtNombreNuevaMateria.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         txtNombreNuevaMateria.setForeground(new java.awt.Color(204, 204, 204));
         txtNombreNuevaMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNombreNuevaMateriaActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNombreNuevaMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 210, 30));
+        jPanel1.add(txtNombreNuevaMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 260, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,13 +109,19 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
                 DefaultListModel<Nota> notas = new DefaultListModel<>();
                 int creditos = Integer.parseInt(txtCreditosNuevaMateria.getText());
                 Materia nuevaMateria = new Materia(txtNombreNuevaMateria.getText(), creditos, notas);
-
-                //logica 
-                ventanaSemestre = new VentanaSemestre(nuevaMateria, semestre);
-
-                this.dispose();
+                
+                //se agrega la materia nueva al semestre
+                semestre.getMaterias().addElement(nuevaMateria);
+                
+                //se pasa el semestre a la venta pricipal
+                ventanaSemestre = new VentanaSemestre(semestre); 
+                
+                //se hace visible la ventana principal
                 ventanaSemestre.setVisible(true);
                 ventanaSemestre.setLocationRelativeTo(null);
+                
+                this.dispose();
+                
 
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(rootPane, "ups! Ingresaste un dato invalido");

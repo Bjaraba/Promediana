@@ -33,6 +33,9 @@ public class VentanaMateria extends javax.swing.JFrame {
         // se configura la etiqueta con el nombre de la materia 
         lblNombreMateria.setText(selectMateria.getNombre());
         
+        // se llenan los modelos
+        llenarModelos(selectMateria);
+        
         // se relacionan las listas con los modelos
         jListNombreNota.setModel(nombre);
         jListPorcentaje.setModel(porcentaje);
@@ -40,6 +43,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         
         // se saca el promedio de la materia para mostralo en la etiqueta
         String promedioMateria = String.valueOf(selectMateria.getPromedio()); 
+        lblPromedio.setText(promedioMateria);
     }
     
     public void llenarModelos (Materia materia) {
@@ -89,6 +93,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         btnNuevo = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         lblPromedio = new javax.swing.JLabel();
+        btnAtras = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -98,7 +103,8 @@ public class VentanaMateria extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(148, 112, 112));
         jPanel2.setForeground(new java.awt.Color(204, 204, 204));
 
-        lblNombreMateria.setFont(new java.awt.Font("SF UI Display", 0, 24)); // NOI18N
+        lblNombreMateria.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        lblNombreMateria.setForeground(new java.awt.Color(51, 51, 51));
         lblNombreMateria.setText("Nombre de la Materia");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -108,7 +114,7 @@ public class VentanaMateria extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblNombreMateria)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -126,11 +132,11 @@ public class VentanaMateria extends javax.swing.JFrame {
         jScrollPane1.setForeground(new java.awt.Color(204, 204, 204));
 
         jListNombreNota.setBackground(new java.awt.Color(68, 68, 68));
-        jListNombreNota.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jListNombreNota.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jListNombreNota.setForeground(new java.awt.Color(204, 204, 204));
         jScrollPane1.setViewportView(jListNombreNota);
 
-        jLabel2.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setText("Calificacion");
 
@@ -138,7 +144,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         jScrollPane2.setForeground(new java.awt.Color(204, 204, 204));
 
         jListCalificacion.setBackground(new java.awt.Color(68, 68, 68));
-        jListCalificacion.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jListCalificacion.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jListCalificacion.setForeground(new java.awt.Color(204, 204, 204));
         jScrollPane2.setViewportView(jListCalificacion);
 
@@ -146,15 +152,15 @@ public class VentanaMateria extends javax.swing.JFrame {
         jScrollPane3.setForeground(new java.awt.Color(204, 204, 204));
 
         jListPorcentaje.setBackground(new java.awt.Color(68, 68, 68));
-        jListPorcentaje.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jListPorcentaje.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jListPorcentaje.setForeground(new java.awt.Color(204, 204, 204));
         jScrollPane3.setViewportView(jListPorcentaje);
 
-        jLabel4.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(204, 204, 204));
         jLabel4.setText("Porcentaje");
 
-        jLabel3.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(204, 204, 204));
         jLabel3.setText("Nota");
 
@@ -171,7 +177,7 @@ public class VentanaMateria extends javax.swing.JFrame {
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(51, 51, 51)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(55, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(63, 63, 63)
@@ -183,7 +189,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +206,8 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(148, 112, 112));
 
-        lblAnalisis.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        lblAnalisis.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
         lblAnalisis.setText("Analisis");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -223,7 +230,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 250, 280));
 
         btnNuevo.setBackground(new java.awt.Color(148, 112, 112));
-        btnNuevo.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        btnNuevo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(51, 51, 51));
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -231,16 +238,28 @@ public class VentanaMateria extends javax.swing.JFrame {
                 btnNuevoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 540, -1, -1));
+        jPanel1.add(btnNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 530, -1, -1));
 
-        jLabel6.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setText("Promedio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 540, -1, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 530, -1, -1));
 
-        lblPromedio.setFont(new java.awt.Font("SF UI Display", 0, 18)); // NOI18N
+        lblPromedio.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblPromedio.setForeground(new java.awt.Color(204, 204, 204));
         lblPromedio.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
-        jPanel1.add(lblPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 540, 80, 30));
+        jPanel1.add(lblPromedio, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 530, 80, 30));
+
+        btnAtras.setBackground(new java.awt.Color(148, 112, 112));
+        btnAtras.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(51, 51, 51));
+        btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAtras, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,8 +283,17 @@ public class VentanaMateria extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+       VentanaSemestre ventanaSemestre = new VentanaSemestre(semestre); 
+       ventanaSemestre.setVisible(true); 
+       ventanaSemestre.setLocationRelativeTo(null);
+       
+       this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
