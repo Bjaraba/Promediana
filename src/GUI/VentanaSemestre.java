@@ -33,6 +33,11 @@ public class VentanaSemestre extends javax.swing.JFrame {
         jListCreditos.setModel(creditos);
         jListMateria.setModel(nombreMaterias);
         jListPromedios.setModel(promedios);
+        
+        // la siguiente linea llama al metod de la clase Semestre para conseguir
+        // el promedio credito de un semestre lo convierte en un String y lo manda al 
+        // label al que coresponde el promedio semestral
+        lblPromedioSemestral.setText(String.valueOf(semestre.getPromedioCredito()));
     }
 
     //servira para que tomar todos los elementos del array de materias e ingresarlos en los modelos

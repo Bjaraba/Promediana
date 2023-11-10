@@ -25,7 +25,7 @@ public class Materia {
         this.nombre = nombre;
     }
 
-    public double getCreditos() {
+    public int getCreditos() {
         return creditos;
     }
 
