@@ -23,7 +23,8 @@ public class VentanaSemestre extends javax.swing.JFrame {
     public VentanaSemestre(Semestre semestre) {
         initComponents();
         this.semestre = semestre;
-
+       
+        
         txtLimiteInferior.setText(String.valueOf(semestre.getLimiteInferior())); //se toman los limites superiores y los limites inferiores
         txtLimiteSuperior.setText(String.valueOf(semestre.getLimiteSuperior()));
 
@@ -103,6 +104,7 @@ public class VentanaSemestre extends javax.swing.JFrame {
         lblPromedioSemestral = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        btnCambiar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -344,7 +346,19 @@ public class VentanaSemestre extends javax.swing.JFrame {
                 .addContainerGap(120, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 260, 280, 260));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 280, 260));
+
+        btnCambiar.setBackground(new java.awt.Color(68, 68, 68));
+        btnCambiar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        btnCambiar.setForeground(new java.awt.Color(204, 204, 204));
+        btnCambiar.setText("cambiar");
+        btnCambiar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -410,8 +424,18 @@ public class VentanaSemestre extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
+        if (!txtLimiteInferior.getText().equals("") && !txtLimiteSuperior.getText().equals("")){
+            semestre.setLimiteInferior(Double.parseDouble(txtLimiteInferior.getText()));
+            semestre.setLimiteSuperior(Double.parseDouble(txtLimiteSuperior.getText()));
+        } else {
+        JOptionPane.showMessageDialog(rootPane, "Ups! se te olvido llenar algo");
+        }
+    }//GEN-LAST:event_btnCambiarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCambiar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevaMateria;
     private javax.swing.JLabel jLabel1;

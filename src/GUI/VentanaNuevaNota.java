@@ -41,7 +41,7 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
     //constructor que solo se utlizara para editar una nota
     public VentanaNuevaNota(Semestre semestre, int indexMateria, int indexNota) {
         initComponents();
-        
+
         // se editan los textos de manera que sea mas consecuente con la accion
         // que se esta realizndo (Editar una Nota)
         lblNombre.setText("Edite el nombre de la nota");
@@ -140,45 +140,58 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
     private void btnSiguienteNuevaNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteNuevaNotaActionPerformed
         // boton para agregar la nueva nota a la materia 
+        try {
+            double calificacion = Double.parseDouble(txtCalificacionNuevaNota.getText());
+        } catch (Exception e) {
+        }
 
         // se condiciona que los huecos de texto no esten vacios 
         if (txtCalificacionNuevaNota.getText().equals("") || txtNombreNuevaNota.getText().equals("") || txtPorcentajeNuevaNota.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Ups! Se te olvido ingresar algo");
         } else {
-            //se controla las exepciones de tipo argumento ilegal
             try {
+                //se controla las exepciones de tipo argumento ilegal
 
                 String nombre = txtNombreNuevaNota.getText();
                 double porcentaje = Double.parseDouble(txtPorcentajeNuevaNota.getText());
                 double calificacion = Double.parseDouble(txtCalificacionNuevaNota.getText());
 
-                //creacion de la nueva nota 
-                Nota nuevaNota = new Nota(nombre, porcentaje, calificacion);
+                // con este condicional se verifica que la calificacion este dentro de los limites establecios por el usuario
+                if (calificacion >= semestre.getLimiteInferior() && calificacion <= semestre.getLimiteSuperior()) {
+                    //creacion de la nueva nota 
+                    Nota nuevaNota = new Nota(nombre, porcentaje, calificacion);
 
-                //se ingresa la nueva nota al semestre 
-                // si no hay ningun indice de nota entonces 
-                // se agregara una nueva nota
-                if (indexNota == -1) {
-                    semestre.getMaterias().getElementAt(index).getNotas().addElement(nuevaNota);
+                    //se ingresa la nueva nota al semestre 
+                    // si no hay ningun indice de nota entonces 
+                    // se agregara una nueva nota
+                    if (indexNota == -1) {
+                        semestre.getMaterias().getElementAt(index).getNotas().addElement(nuevaNota);
 
-                    // De lo contrario se editará la nota en el indice especificado
+                        // De lo contrario se editará la nota en el indice especificado
+                    } else {
+                        semestre.getMaterias().getElementAt(index).getNotas().set(indexNota, nuevaNota);
+
+                    }
+
+                    // se pasa el nuevos semestre con la nueva nota a la ventana materia y se hace visible; 
+                    VentanaMateria ventanaMateria = new VentanaMateria(semestre, index);
+                    ventanaMateria.setVisible(true);
+                    ventanaMateria.setLocationRelativeTo(null);
+
+                    this.dispose();
+
+                    // de lo contrario sí si se paso el indice entonces 
+                    // lo pasado por teclado se guardará en la materia del
+                    // indice indicadoF
                 } else {
-                    semestre.getMaterias().getElementAt(index).getNotas().set(indexNota, nuevaNota); 
-
+                    JOptionPane.showMessageDialog(rootPane, "La calificacion que pusiste esta fuera de los limites que espesificaste");
+                    txtCalificacionNuevaNota.setText("");
                 }
 
-                // se pasa el nuevos semestre con la nueva nota a la ventana materia y se hace visible; 
-                VentanaMateria ventanaMateria = new VentanaMateria(semestre, index);
-                ventanaMateria.setVisible(true);
-                ventanaMateria.setLocationRelativeTo(null);
-
-                this.dispose();
-
-                // de lo contrario sí si se paso el indice entonces 
-                // lo pasado por teclado se guardará en la materia del
-                // indice indicado
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Ups! Ingresaste un dato invalido");
+                txtCalificacionNuevaNota.setText("");
+                txtPorcentajeNuevaNota.setText("");
             }
         }
     }//GEN-LAST:event_btnSiguienteNuevaNotaActionPerformed
