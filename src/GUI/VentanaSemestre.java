@@ -5,6 +5,7 @@ import javax.swing.JOptionPane;
 import promedianainterfaz.Semestre;
 import promedianainterfaz.Materia;
 import java.awt.event.*;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -33,7 +34,7 @@ public class VentanaSemestre extends javax.swing.JFrame {
         jListCreditos.setModel(creditos);
         jListMateria.setModel(nombreMaterias);
         jListPromedios.setModel(promedios);
-        
+
         // la siguiente linea llama al metod de la clase Semestre para conseguir
         // el promedio credito de un semestre lo convierte en un String y lo manda al 
         // label al que coresponde el promedio semestral
@@ -277,7 +278,7 @@ public class VentanaSemestre extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(btnNuevaMateria)
-                .addGap(48, 48, 48)
+                .addGap(45, 45, 45)
                 .addComponent(btnEliminar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -299,9 +300,9 @@ public class VentanaSemestre extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(41, 41, 41)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnNuevaMateria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevaMateria)
+                    .addComponent(btnEliminar))
                 .addGap(31, 31, 31))
         );
 
@@ -385,17 +386,25 @@ public class VentanaSemestre extends javax.swing.JFrame {
 
             //hacer invicible la ventana principal
             this.dispose();
+            
+            // si se selecciona una materia y se da doble clik  
+        } else if (SwingUtilities.isRightMouseButton(evt) && indice != -1) {
+            ventanaNuevaMateria = new VentanaNuevaMateria(semestre, indice);
+            ventanaNuevaMateria.setVisible(true);
+            ventanaNuevaMateria.setLocationRelativeTo(null);
+
+            this.dispose();
         }
     }//GEN-LAST:event_jListMateriaMouseClicked
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int indice = jListMateria.getSelectedIndex(); 
+        int indice = jListMateria.getSelectedIndex();
         if (indice != -1) {
             // se elimina la materia del indice seleccionado  
-            semestre.getMaterias().remove(indice); 
-            
+            semestre.getMaterias().remove(indice);
+
             // ahora se elimina de los modelos
-            nombreMaterias.remove(indice); 
+            nombreMaterias.remove(indice);
             promedios.remove(indice);
             creditos.remove(indice);
         }

@@ -19,12 +19,28 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
     private VentanaSemestre ventanaSemestre;
     private Semestre semestre = new Semestre();
 
+    // esta misma ventana se utilizará para ediatar una Nota 
+    // se este valor no cambia de -1 entonces lo que se desea es ingresar una 
+    // nueva materia, de los contrario se editara la materia en el indice indicado
+    private int indiceMateria = -1;
+
     public VentanaNuevaMateria(Semestre semestre) {
         initComponents();
 
         this.semestre = semestre;
     }
 
+    // segundo constructor que permitira editar una nota
+    public VentanaNuevaMateria(Semestre semestre, int indiceMateria) {
+        initComponents();
+        this.semestre = semestre;
+        this.indiceMateria = indiceMateria;
+
+        // se editan los textos con el fin de que sean coherentes con la acción 
+        // que se esta realizando (Editar una materia)
+        lblNombre.setText("Edite el nombre del la materia");
+        lblCreditos.setText("Edite los creditos de la materia");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,9 +54,9 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnSiguiente = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
         txtNombreNuevaMateria = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lblCreditos = new javax.swing.JLabel();
         txtCreditosNuevaMateria = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,9 +77,9 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(112, 129, 148));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("Nombre de la Materia");
+        lblNombre.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(51, 51, 51));
+        lblNombre.setText("Nombre de la Materia");
 
         txtNombreNuevaMateria.setBackground(new java.awt.Color(68, 68, 68));
         txtNombreNuevaMateria.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -74,9 +90,9 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Creditos de la Materia");
+        lblCreditos.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblCreditos.setForeground(new java.awt.Color(51, 51, 51));
+        lblCreditos.setText("Creditos de la Materia");
 
         txtCreditosNuevaMateria.setBackground(new java.awt.Color(68, 68, 68));
         txtCreditosNuevaMateria.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -89,8 +105,8 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
+                    .addComponent(lblNombre)
+                    .addComponent(lblCreditos)
                     .addComponent(txtCreditosNuevaMateria, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                     .addComponent(txtNombreNuevaMateria))
                 .addContainerGap(61, Short.MAX_VALUE))
@@ -99,11 +115,11 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jLabel1)
+                .addComponent(lblNombre)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNombreNuevaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(48, 48, 48)
-                .addComponent(jLabel2)
+                .addComponent(lblCreditos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtCreditosNuevaMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(48, Short.MAX_VALUE))
@@ -140,7 +156,16 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
                 Materia nuevaMateria = new Materia(txtNombreNuevaMateria.getText(), creditos, notas);
 
                 //se agrega la materia nueva al semestre
-                semestre.getMaterias().addElement(nuevaMateria);
+                
+                // si no hay ningun indece seleccionado para editar la materia 
+                // significa que lo quese quiere es agregar una materia nueva
+                if (indiceMateria == -1) {
+                    semestre.getMaterias().addElement(nuevaMateria);
+                    
+                    //de lo cotrario se editara la materia en el indice indicado
+                } else {
+                    semestre.getMaterias().setElementAt(nuevaMateria, indiceMateria);
+                }
 
                 //se pasa el semestre a la venta pricipal
                 ventanaSemestre = new VentanaSemestre(semestre);
@@ -160,10 +185,10 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguiente;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCreditos;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JTextField txtCreditosNuevaMateria;
     private javax.swing.JTextField txtNombreNuevaMateria;
     // End of variables declaration//GEN-END:variables

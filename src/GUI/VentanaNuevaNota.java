@@ -22,6 +22,10 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
     private int index;
     // me dira con que indice de la lista de materias estoy tabajando
 
+    private int indexNota = -1;
+    // servira si lo que se quiere es si es editar una nota en ves de crear una
+    // nueva
+
     public VentanaNuevaNota(Semestre semestre, int index) {
         initComponents();
 
@@ -32,6 +36,28 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
         //se cambia el semestre vacio por el semestre que pase por parametro
         this.semestre = semestre;
+    }
+
+    //constructor que solo se utlizara para editar una nota
+    public VentanaNuevaNota(Semestre semestre, int indexMateria, int indexNota) {
+        initComponents();
+        
+        // se editan los textos de manera que sea mas consecuente con la accion
+        // que se esta realizndo (Editar una Nota)
+        lblNombre.setText("Edite el nombre de la nota");
+        lblProcentaje.setText("Edite el porcentaje");
+        lblCalificacion.setText("Edite su calificacion");
+
+        this.index = index;
+
+        //se cambian los valores de la materia vacia a los de la materia seleccionada
+        this.materia = semestre.getMaterias().getElementAt(index);
+
+        //se cambia el semestre vacio por el semestre que pase por parametro
+        this.semestre = semestre;
+
+        //se indica cual nota es la que se quiere editar
+        this.indexNota = indexNota;
     }
 
     /**
@@ -45,9 +71,9 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnSiguienteNuevaNota = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lblCalificacion = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
+        lblProcentaje = new javax.swing.JLabel();
         txtCalificacionNuevaNota = new javax.swing.JTextField();
         txtNombreNuevaNota = new javax.swing.JTextField();
         txtPorcentajeNuevaNota = new javax.swing.JTextField();
@@ -68,20 +94,20 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
         });
         jPanel1.add(btnSiguienteNuevaNota, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel1.setText("calificacion");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+        lblCalificacion.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblCalificacion.setForeground(new java.awt.Color(51, 51, 51));
+        lblCalificacion.setText("calificacion");
+        jPanel1.add(lblCalificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel2.setText("Nombre de la nueva nota");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 20));
+        lblNombre.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(51, 51, 51));
+        lblNombre.setText("Nombre de la nueva nota");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, 20));
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel3.setText("porcentaje de la nueva nota");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        lblProcentaje.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblProcentaje.setForeground(new java.awt.Color(51, 51, 51));
+        lblProcentaje.setText("porcentaje de la nueva nota");
+        jPanel1.add(lblProcentaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         txtCalificacionNuevaNota.setBackground(new java.awt.Color(68, 68, 68));
         txtCalificacionNuevaNota.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -121,6 +147,7 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
         } else {
             //se controla las exepciones de tipo argumento ilegal
             try {
+
                 String nombre = txtNombreNuevaNota.getText();
                 double porcentaje = Double.parseDouble(txtPorcentajeNuevaNota.getText());
                 double calificacion = Double.parseDouble(txtCalificacionNuevaNota.getText());
@@ -129,7 +156,16 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
                 Nota nuevaNota = new Nota(nombre, porcentaje, calificacion);
 
                 //se ingresa la nueva nota al semestre 
-                semestre.getMaterias().getElementAt(index).getNotas().addElement(nuevaNota);
+                // si no hay ningun indice de nota entonces 
+                // se agregara una nueva nota
+                if (indexNota == -1) {
+                    semestre.getMaterias().getElementAt(index).getNotas().addElement(nuevaNota);
+
+                    // De lo contrario se editará la nota en el indice especificado
+                } else {
+                    semestre.getMaterias().getElementAt(index).getNotas().set(indexNota, nuevaNota); 
+
+                }
 
                 // se pasa el nuevos semestre con la nueva nota a la ventana materia y se hace visible; 
                 VentanaMateria ventanaMateria = new VentanaMateria(semestre, index);
@@ -138,6 +174,9 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
                 this.dispose();
 
+                // de lo contrario sí si se paso el indice entonces 
+                // lo pasado por teclado se guardará en la materia del
+                // indice indicado
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(rootPane, "Ups! Ingresaste un dato invalido");
             }
@@ -147,10 +186,10 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSiguienteNuevaNota;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblCalificacion;
+    private javax.swing.JLabel lblNombre;
+    private javax.swing.JLabel lblProcentaje;
     private javax.swing.JTextField txtCalificacionNuevaNota;
     private javax.swing.JTextField txtNombreNuevaNota;
     private javax.swing.JTextField txtPorcentajeNuevaNota;

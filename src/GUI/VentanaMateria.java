@@ -5,64 +5,66 @@ package GUI;
  * @author brayan
  */
 import javax.swing.DefaultListModel;
-import promedianainterfaz.Materia; 
-import promedianainterfaz.Semestre; 
+import javax.swing.SwingUtilities;
+import promedianainterfaz.Materia;
+import promedianainterfaz.Semestre;
 
 public class VentanaMateria extends javax.swing.JFrame {
+
     //modelos de las notas
-    private DefaultListModel<String> nombre = new DefaultListModel<>(); 
-    private DefaultListModel<String> porcentaje = new DefaultListModel<>(); 
+    private DefaultListModel<String> nombre = new DefaultListModel<>();
+    private DefaultListModel<String> porcentaje = new DefaultListModel<>();
     private DefaultListModel<String> calificacion = new DefaultListModel<>();
-    
+
     //coneccion con la ventana de nueva nota
-    private int indexMateria; 
+    private int indexMateria;
     private Semestre semestre = new Semestre(); // semestre vacio; 
 
     // constructor 
     public VentanaMateria(Semestre semestre, int indexMateria) {
         initComponents();
-        
+
         //se cambia el semestre vacio por el pasado como parametro
-        this.semestre = semestre; 
-        
-        this.indexMateria = indexMateria; 
-        
+        this.semestre = semestre;
+
+        this.indexMateria = indexMateria;
+
         //se obtiene la materia en el indice seleccionado 
         Materia selectMateria = semestre.getMaterias().getElementAt(indexMateria);
-        
+
         // se configura la etiqueta con el nombre de la materia 
         lblNombreMateria.setText(selectMateria.getNombre());
-        
+
         // se llenan los modelos
         llenarModelos(selectMateria);
-        
+
         // se relacionan las listas con los modelos
         jListNombreNota.setModel(nombre);
         jListPorcentaje.setModel(porcentaje);
         jListCalificacion.setModel(calificacion);
-        
+
         // se saca el promedio de la materia para mostralo en la etiqueta
-        String promedioMateria = String.valueOf(selectMateria.getPromedio()); 
+        String promedioMateria = String.valueOf(selectMateria.getPromedio());
         lblPromedio.setText(promedioMateria);
     }
-    
-    public void llenarModelos (Materia materia) {
+
+    public void llenarModelos(Materia materia) {
         if (materia.getNotas().getSize() != 0) {
-            
-            for (int i = 0; i < materia.getNotas().getSize(); i++){
-                
+
+            for (int i = 0; i < materia.getNotas().getSize(); i++) {
+
                 // nombre
-                String nombre = materia.getNotas().getElementAt(i).getNombre(); 
+                String nombre = materia.getNotas().getElementAt(i).getNombre();
                 this.nombre.addElement(nombre);
-                
+
                 // porcentaje
-                String porcentaje = String.valueOf((materia.getNotas().getElementAt(i).getPorcentaje()) * 100); 
+                String porcentaje = String.valueOf((materia.getNotas().getElementAt(i).getPorcentaje()) * 100);
                 this.porcentaje.addElement(porcentaje);
-                
+
                 // calificacion 
-                String calificacion = String.valueOf(materia.getNotas().getElementAt(i).getCalificacion()); 
-                this.calificacion.addElement(calificacion); 
-            } 
+                String calificacion = String.valueOf(materia.getNotas().getElementAt(i).getCalificacion());
+                this.calificacion.addElement(calificacion);
+            }
         }
     }
 
@@ -135,6 +137,11 @@ public class VentanaMateria extends javax.swing.JFrame {
         jListNombreNota.setBackground(new java.awt.Color(68, 68, 68));
         jListNombreNota.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         jListNombreNota.setForeground(new java.awt.Color(204, 204, 204));
+        jListNombreNota.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListNombreNotaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jListNombreNota);
 
         jLabel2.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
@@ -297,22 +304,40 @@ public class VentanaMateria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria); 
+        VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria);
         ventanaNuevaNota.setVisible(true);
         ventanaNuevaNota.setLocationRelativeTo(null);
-        
+
         this.dispose();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
-       VentanaSemestre ventanaSemestre = new VentanaSemestre(semestre); 
-       ventanaSemestre.setVisible(true); 
-       ventanaSemestre.setLocationRelativeTo(null);
-       
-       this.dispose();
-    }//GEN-LAST:event_btnAtrasActionPerformed
+        VentanaSemestre ventanaSemestre = new VentanaSemestre(semestre);
+        ventanaSemestre.setVisible(true);
+        ventanaSemestre.setLocationRelativeTo(null);
 
-   
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+    
+    // con un clik derecho sera posible editar una nota
+    private void jListNombreNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListNombreNotaMouseClicked
+        // si el usuario da clik derecho en una nota se abrira un 
+        // la opcion de editar una materia
+        if (SwingUtilities.isRightMouseButton(evt)) {
+            int indexNota = jListNombreNota.getSelectedIndex();
+
+            if (indexNota != -1) {
+                // se ingresa el constructor especificoque modifica una nota
+                VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria, indexNota);
+                ventanaNuevaNota.setVisible(true);
+                ventanaNuevaNota.setLocationRelativeTo(null);
+                
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_jListNombreNotaMouseClicked
+    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnNuevo;
