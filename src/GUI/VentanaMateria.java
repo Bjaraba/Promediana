@@ -97,6 +97,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -238,7 +239,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, 250, 280));
 
         btnNuevo.setBackground(new java.awt.Color(148, 112, 112));
-        btnNuevo.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        btnNuevo.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnNuevo.setForeground(new java.awt.Color(51, 51, 51));
         btnNuevo.setText("Nuevo");
         btnNuevo.addActionListener(new java.awt.event.ActionListener() {
@@ -289,6 +290,17 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 490, 250, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(153, 51, 0));
+        btnEliminar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(204, 204, 204));
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 530, 90, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,10 +348,21 @@ public class VentanaMateria extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jListNombreNotaMouseClicked
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int index = jListNombreNota.getSelectedIndex();
+        if (index != -1 ) {
+            nombre.remove(index); 
+            calificacion.remove(index); 
+            porcentaje.remove(index); 
+            semestre.getMaterias().getElementAt(indexMateria).getNotas().removeElementAt(index);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

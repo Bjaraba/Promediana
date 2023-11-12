@@ -15,6 +15,7 @@ public class Materia {
         this.nombre = nombre;
         this.creditos = creditos;
         this.notas = notas;
+        
     }
 
     public String getNombre() {

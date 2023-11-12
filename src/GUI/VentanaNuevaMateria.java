@@ -18,6 +18,10 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
 
     private VentanaSemestre ventanaSemestre;
     private Semestre semestre = new Semestre();
+    
+    // esta variable servira para asegurarse de que el usuario no ingrese mas 
+    // del porcentaje del 100 % 
+    private double sumPorcentaje = 0; 
 
     // esta misma ventana se utilizará para ediatar una Nota 
     // se este valor no cambia de -1 entonces lo que se desea es ingresar una 
@@ -40,6 +44,8 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         // que se esta realizando (Editar una materia)
         lblNombre.setText("Edite el nombre del la materia");
         lblCreditos.setText("Edite los creditos de la materia");
+        
+        // 
     }
 
     /**
