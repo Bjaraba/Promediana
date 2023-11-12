@@ -158,6 +158,8 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
                 // con este condicional se verifica que la calificacion este dentro de los limites establecios por el usuario
                 if (calificacion >= semestre.getLimiteInferior() && calificacion <= semestre.getLimiteSuperior()) {
+                     //Se valida que la condición no sobrepase los valores negativos y mayores de 100
+                    if (porcentaje >= 0 && porcentaje <= 100){
                     //creacion de la nueva nota 
                     Nota nuevaNota = new Nota(nombre, porcentaje, calificacion);
 
@@ -183,6 +185,10 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
                     // de lo contrario sí si se paso el indice entonces 
                     // lo pasado por teclado se guardará en la materia del
                     // indice indicadoF
+                    }else{
+                    JOptionPane.showMessageDialog(rootPane, "El porcentaje no puede ser negativo y menor que cien.");
+                    txtPorcentajeNuevaNota.setText("");
+                    }
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "La calificacion que pusiste esta fuera de los limites que espesificaste");
                     txtCalificacionNuevaNota.setText("");
