@@ -16,7 +16,7 @@ public class PromedianaInterfaz {
     public static void main(String[] args) {
         //nuevo objeto semestre
         DefaultListModel<Materia> materias = new DefaultListModel<Materia>(); 
-        Semestre semestre = new Semestre( 5, 0, 4.3, materias); 
+        Semestre semestre = new Semestre( 0, 0, 0, materias); 
         
         VentanaSemestre ventanaPricipal = new VentanaSemestre(semestre);
         ventanaPricipal.setVisible(true);

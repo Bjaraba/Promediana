@@ -46,6 +46,8 @@ public class VentanaMateria extends javax.swing.JFrame {
         // se saca el promedio de la materia para mostralo en la etiqueta
         String promedioMateria = String.valueOf(selectMateria.getPromedio());
         lblPromedio.setText(promedioMateria);
+        
+        lblAnalisis.setText(getAnalisis(semestre, indexMateria));
     }
 
     public void llenarModelos(Materia materia) {
@@ -66,6 +68,25 @@ public class VentanaMateria extends javax.swing.JFrame {
                 this.calificacion.addElement(calificacion);
             }
         }
+    }
+    
+    public String getAnalisis(Semestre semestre, int indexMateria) {
+        // nos aseguramos de trabajar con la misma materia que aparece en pantalla 
+        Materia materia = semestre.getMaterias().getElementAt(indexMateria); 
+        double promedio = materia.getPromedio(); 
+        double meta = semestre.getMeta(); 
+        double sumPorcentaje = 0; 
+        for (int i = 0; i < materia.getNotas().getSize(); i++) {
+            sumPorcentaje += materia.getNotas().getElementAt(i).getPorcentaje(); 
+        }
+        double notaFaltante = (meta - promedio) / (1 - sumPorcentaje); 
+        String notaFaltanteString = String.valueOf(notaFaltante); 
+        String porcentajeFaltante = String.valueOf(1 - sumPorcentaje); 
+        
+        String analisis = "Necesitas sacar \nuna nota de " + notaFaltanteString + "\n" +
+                "con un porcentaje \nde " + porcentajeFaltante + " para alcanzar \ntu meta"; 
+        
+        return analisis; 
     }
 
     /**
@@ -215,7 +236,7 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(148, 112, 112));
 
-        lblAnalisis.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        lblAnalisis.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
         lblAnalisis.setText("Analisis");
 

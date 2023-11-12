@@ -23,8 +23,8 @@ public class VentanaSemestre extends javax.swing.JFrame {
     public VentanaSemestre(Semestre semestre) {
         initComponents();
         this.semestre = semestre;
-       
-        
+
+        txtMeta.setText(String.valueOf(semestre.getMeta()));
         txtLimiteInferior.setText(String.valueOf(semestre.getLimiteInferior())); //se toman los limites superiores y los limites inferiores
         txtLimiteSuperior.setText(String.valueOf(semestre.getLimiteSuperior()));
 
@@ -80,14 +80,8 @@ public class VentanaSemestre extends javax.swing.JFrame {
 
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        txtLimiteInferior = new java.awt.TextField();
-        txtLimiteSuperior = new java.awt.TextField();
-        jLabel3 = new javax.swing.JLabel();
-        txtMeta = new java.awt.TextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListMateria = new javax.swing.JList<>();
@@ -104,6 +98,13 @@ public class VentanaSemestre extends javax.swing.JFrame {
         lblPromedioSemestral = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        txtMeta = new java.awt.TextField();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        txtLimiteInferior = new java.awt.TextField();
+        txtLimiteSuperior = new java.awt.TextField();
+        jLabel2 = new javax.swing.JLabel();
         btnCambiar = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -121,11 +122,6 @@ public class VentanaSemestre extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(68, 68, 68));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel2.setText("Meta");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 40, -1, -1));
 
         jPanel4.setBackground(new java.awt.Color(112, 129, 148));
 
@@ -152,50 +148,6 @@ public class VentanaSemestre extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 320, 60));
-
-        jPanel5.setBackground(new java.awt.Color(68, 68, 68));
-
-        txtLimiteInferior.setBackground(new java.awt.Color(112, 129, 148));
-        txtLimiteInferior.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        txtLimiteInferior.setForeground(new java.awt.Color(204, 204, 204));
-
-        txtLimiteSuperior.setBackground(new java.awt.Color(112, 129, 148));
-        txtLimiteSuperior.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        txtLimiteSuperior.setForeground(new java.awt.Color(204, 204, 204));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txtLimiteInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(txtLimiteSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtLimiteInferior, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(txtLimiteSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 170, 260, 50));
-
-        jLabel3.setBackground(new java.awt.Color(68, 68, 68));
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
-        jLabel3.setText("Se califica desde hasta");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
-
-        txtMeta.setBackground(new java.awt.Color(112, 129, 148));
-        txtMeta.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        txtMeta.setForeground(new java.awt.Color(204, 204, 204));
-        jPanel1.add(txtMeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 90, 30));
 
         jPanel2.setBackground(new java.awt.Color(68, 68, 68));
 
@@ -346,19 +298,107 @@ public class VentanaSemestre extends javax.swing.JFrame {
                 .addContainerGap(120, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 270, 280, 260));
+        jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 290, 280, 260));
+
+        jPanel7.setBackground(java.awt.Color.darkGray);
+        jPanel7.setForeground(java.awt.Color.gray);
+
+        txtMeta.setBackground(new java.awt.Color(112, 129, 148));
+        txtMeta.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtMeta.setForeground(new java.awt.Color(204, 204, 204));
+
+        jLabel3.setBackground(new java.awt.Color(68, 68, 68));
+        jLabel3.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setText("Se califica desde hasta");
+
+        jPanel5.setBackground(java.awt.Color.darkGray);
+
+        txtLimiteInferior.setBackground(new java.awt.Color(112, 129, 148));
+        txtLimiteInferior.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtLimiteInferior.setForeground(new java.awt.Color(204, 204, 204));
+
+        txtLimiteSuperior.setBackground(new java.awt.Color(112, 129, 148));
+        txtLimiteSuperior.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        txtLimiteSuperior.setForeground(new java.awt.Color(204, 204, 204));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtLimiteInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(txtLimiteSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtLimiteInferior, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txtLimiteSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 0, 20)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Meta");
 
         btnCambiar.setBackground(new java.awt.Color(68, 68, 68));
         btnCambiar.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
         btnCambiar.setForeground(new java.awt.Color(204, 204, 204));
-        btnCambiar.setText("cambiar");
-        btnCambiar.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        btnCambiar.setText("Establecer");
         btnCambiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCambiarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCambiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 230, -1, -1));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMeta, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnCambiar)
+                                .addGap(10, 10, 10)))))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(btnCambiar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtMeta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 20, 330, 250));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -375,10 +415,13 @@ public class VentanaSemestre extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevaMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaMateriaActionPerformed
-        if (txtLimiteInferior.getText().equalsIgnoreCase("") || txtLimiteSuperior.getText().equalsIgnoreCase("")) {
-            JOptionPane.showMessageDialog(rootPane, "Debes Ingresar los limites de calificacion");
-        } else {
+        if (txtLimiteInferior.getText().equalsIgnoreCase("") || txtLimiteSuperior.getText().equalsIgnoreCase("") || txtMeta.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Promediana no funcionara sin los limites de calificacion ni con la meta");
 
+        } else if (txtLimiteSuperior.getText().equalsIgnoreCase("0") || txtMeta.getText().equals("0")) {
+            JOptionPane.showMessageDialog(rootPane, "Promediana no funcionara con limite superior de calificacion ni con meta iguales a 0");
+
+        } else {
             ventanaNuevaMateria = new VentanaNuevaMateria(semestre);
 
             ventanaNuevaMateria.setVisible(true);
@@ -400,7 +443,7 @@ public class VentanaSemestre extends javax.swing.JFrame {
 
             //hacer invicible la ventana principal
             this.dispose();
-            
+
             // si se selecciona una materia y se da doble clik  
         } else if (SwingUtilities.isRightMouseButton(evt) && indice != -1) {
             ventanaNuevaMateria = new VentanaNuevaMateria(semestre, indice);
@@ -425,11 +468,14 @@ public class VentanaSemestre extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
-        if (!txtLimiteInferior.getText().equals("") && !txtLimiteSuperior.getText().equals("")){
+        if (txtLimiteInferior.getText().equals("") || txtLimiteSuperior.getText().equals("") || txtMeta.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Ups! se te olvido llenar algo");
+        } else if (txtLimiteSuperior.getText().equals("0") || txtMeta.getText().equals("0") || txtLimiteSuperior.getText().equals("0.0") || txtMeta.getText().equals("0.0")) {
+            JOptionPane.showMessageDialog(rootPane, "promediana no puede trabajar con limite superior o metas iguales a 0");
+        } else {
             semestre.setLimiteInferior(Double.parseDouble(txtLimiteInferior.getText()));
             semestre.setLimiteSuperior(Double.parseDouble(txtLimiteSuperior.getText()));
-        } else {
-        JOptionPane.showMessageDialog(rootPane, "Ups! se te olvido llenar algo");
+            semestre.setMeta(Double.parseDouble(txtMeta.getText()));
         }
     }//GEN-LAST:event_btnCambiarActionPerformed
 
@@ -455,6 +501,7 @@ public class VentanaSemestre extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
