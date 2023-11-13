@@ -59,7 +59,7 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
         //se indica cual nota es la que se quiere editar
         this.indexNota = indexNota;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,10 +140,7 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
 
     private void btnSiguienteNuevaNotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteNuevaNotaActionPerformed
         // boton para agregar la nueva nota a la materia 
-        try {
-            double calificacion = Double.parseDouble(txtCalificacionNuevaNota.getText());
-        } catch (Exception e) {
-        }
+        
 
         // se condiciona que los huecos de texto no esten vacios 
         if (txtCalificacionNuevaNota.getText().equals("") || txtNombreNuevaNota.getText().equals("") || txtPorcentajeNuevaNota.getText().equals("")) {
@@ -167,8 +164,11 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
                     // si no hay ningun indice de nota entonces 
                     // se agregara una nueva nota
                     if (indexNota == -1) {
+                        if ((semestre.getMaterias().getElementAt(index).getSumaProcentaje() + porcentaje) <= 100){
                         semestre.getMaterias().getElementAt(index).getNotas().addElement(nuevaNota);
-
+                        } else {
+                            JOptionPane.showMessageDialog(rootPane, "No fue posible anexar la calificacion, exidiste el maximo de 100% de porcentaje");
+                        }
                         // De lo contrario se editará la nota en el indice especificado
                     } else {
                         semestre.getMaterias().getElementAt(index).getNotas().set(indexNota, nuevaNota);

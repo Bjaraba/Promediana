@@ -5,6 +5,7 @@ package GUI;
  * @author brayan
  */
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import promedianainterfaz.Materia;
 import promedianainterfaz.Semestre;
@@ -46,7 +47,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         // se saca el promedio de la materia para mostralo en la etiqueta
         String promedioMateria = String.valueOf(selectMateria.getPromedio());
         lblPromedio.setText(promedioMateria);
-        
+
         lblAnalisis.setText(getAnalisis(semestre, indexMateria));
     }
 
@@ -69,24 +70,24 @@ public class VentanaMateria extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public String getAnalisis(Semestre semestre, int indexMateria) {
         // nos aseguramos de trabajar con la misma materia que aparece en pantalla 
-        Materia materia = semestre.getMaterias().getElementAt(indexMateria); 
-        double promedio = materia.getPromedio(); 
-        double meta = semestre.getMeta(); 
-        double sumPorcentaje = 0; 
+        Materia materia = semestre.getMaterias().getElementAt(indexMateria);
+        double promedio = materia.getPromedio();
+        double meta = semestre.getMeta();
+        double sumPorcentaje = 0;
         for (int i = 0; i < materia.getNotas().getSize(); i++) {
-            sumPorcentaje += materia.getNotas().getElementAt(i).getPorcentaje(); 
+            sumPorcentaje += materia.getNotas().getElementAt(i).getPorcentaje();
         }
-        double notaFaltante = (meta - promedio) / (1 - sumPorcentaje); 
-        String notaFaltanteString = String.valueOf(notaFaltante); 
-        String porcentajeFaltante = String.valueOf(1 - sumPorcentaje); 
-        
-        String analisis = "Necesitas sacar \nuna nota de " + notaFaltanteString + "\n" +
-                "con un porcentaje \nde " + porcentajeFaltante + " para alcanzar \ntu meta"; 
-        
-        return analisis; 
+        double notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
+        String notaFaltanteString = String.valueOf(notaFaltante);
+        String porcentajeFaltante = String.valueOf((1 - sumPorcentaje) * 100);
+
+        String analisis = "<html>Necesitas sacar una nota de " + notaFaltanteString
+                + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta</html>";
+
+        return analisis;
     }
 
     /**
@@ -236,7 +237,7 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(148, 112, 112));
 
-        lblAnalisis.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        lblAnalisis.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         lblAnalisis.setForeground(new java.awt.Color(51, 51, 51));
         lblAnalisis.setText("Analisis");
 
@@ -337,11 +338,15 @@ public class VentanaMateria extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
-        VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria);
-        ventanaNuevaNota.setVisible(true);
-        ventanaNuevaNota.setLocationRelativeTo(null);
+        if (semestre.getMaterias().getElementAt(indexMateria).getSumaProcentaje() == 100) {
+            JOptionPane.showMessageDialog(rootPane, "Ya alcanzate el 100% de todas las notas");
+        } else {
+            VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria);
+            ventanaNuevaNota.setVisible(true);
+            ventanaNuevaNota.setLocationRelativeTo(null);
 
-        this.dispose();
+            this.dispose();
+        }
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -351,7 +356,7 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         this.dispose();
     }//GEN-LAST:event_btnAtrasActionPerformed
-    
+
     // con un clik derecho sera posible editar una nota
     private void jListNombreNotaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListNombreNotaMouseClicked
         // si el usuario da clik derecho en una nota se abrira un 
@@ -364,7 +369,7 @@ public class VentanaMateria extends javax.swing.JFrame {
                 VentanaNuevaNota ventanaNuevaNota = new VentanaNuevaNota(semestre, indexMateria, indexNota);
                 ventanaNuevaNota.setVisible(true);
                 ventanaNuevaNota.setLocationRelativeTo(null);
-                
+
                 this.dispose();
             }
         }
@@ -372,14 +377,14 @@ public class VentanaMateria extends javax.swing.JFrame {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int index = jListNombreNota.getSelectedIndex();
-        if (index != -1 ) {
-            nombre.remove(index); 
-            calificacion.remove(index); 
-            porcentaje.remove(index); 
+        if (index != -1) {
+            nombre.remove(index);
+            calificacion.remove(index);
+            porcentaje.remove(index);
             semestre.getMaterias().getElementAt(indexMateria).getNotas().removeElementAt(index);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
