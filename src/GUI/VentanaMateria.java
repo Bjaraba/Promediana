@@ -72,6 +72,10 @@ public class VentanaMateria extends javax.swing.JFrame {
     }
 
     public String getAnalisis(Semestre semestre, int indexMateria) {
+        String analisis;
+        double notaFaltante;
+        String notaFaltanteString, porcentajeFaltante;
+
         // nos aseguramos de trabajar con la misma materia que aparece en pantalla 
         Materia materia = semestre.getMaterias().getElementAt(indexMateria);
         double promedio = materia.getPromedio();
@@ -80,12 +84,21 @@ public class VentanaMateria extends javax.swing.JFrame {
         for (int i = 0; i < materia.getNotas().getSize(); i++) {
             sumPorcentaje += materia.getNotas().getElementAt(i).getPorcentaje();
         }
-        double notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
-        String notaFaltanteString = String.valueOf(notaFaltante);
-        String porcentajeFaltante = String.valueOf((1 - sumPorcentaje) * 100);
 
-        String analisis = "<html>Necesitas sacar una nota de " + notaFaltanteString
-                + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta</html>";
+        if ((1 - sumPorcentaje) == 0 && (meta - promedio) == 0) {
+            analisis = "<html>Felicitaciones has alcazado tu meta</html>";
+        } else if ((1 - sumPorcentaje) > 0 && (meta -  promedio) < 0){
+            analisis = "<html>WOW! alcanzate tu meta inclus antes del porcentaje total"; 
+        } else if ((1 - sumPorcentaje) == 0) {
+            analisis = "<html>Felicitaciones superaste tu meta </html>";
+        } else {
+            notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
+            notaFaltanteString = String.valueOf(notaFaltante);
+            porcentajeFaltante = String.valueOf((1 - sumPorcentaje) * 100);
+            analisis = "<html>Necesitas sacar una nota de " + notaFaltanteString
+                    + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta</html>";
+
+        }
 
         return analisis;
     }
