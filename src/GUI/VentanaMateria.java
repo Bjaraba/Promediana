@@ -87,10 +87,16 @@ public class VentanaMateria extends javax.swing.JFrame {
 
         if ((1 - sumPorcentaje) == 0 && (meta - promedio) == 0) {
             analisis = "<html>Felicitaciones has alcazado tu meta</html>";
-        } else if ((1 - sumPorcentaje) > 0 && (meta -  promedio) < 0){
-            analisis = "<html>WOW! alcanzate tu meta incluso antes del porcentaje total"; 
+        } else if ((1 - sumPorcentaje) > 0 && (meta - promedio) < 0) {
+            analisis = "<html>WOW! alcanzate tu meta incluso antes del porcentaje total";
+        } else if ((1 - sumPorcentaje) == 0 && (meta - promedio) > 0) {
+            analisis = "<html>Este semetre no fue posible alcanzar tu meta ¡pero el proximo lo conseguiremos, animos!</html>";
+        } else if ((1 - sumPorcentaje) > 0 && ((meta - promedio) / (1 - sumPorcentaje)) > semestre.getLimiteSuperior()) {
+            analisis = "<html>La nota que necesitas sacar se pasa del limite superior de calificacion, por lo tanto no sera posible"
+                    + " alcanzar tu meta</html>";
         } else if ((1 - sumPorcentaje) == 0) {
             analisis = "<html>Felicitaciones superaste tu meta </html>";
+
         } else {
             notaFaltante = (meta - promedio) / (1 - sumPorcentaje);
             notaFaltanteString = String.valueOf(notaFaltante);
