@@ -8,7 +8,7 @@ import javax.swing.DefaultListModel;
  */
 public class Semestre {
 
-    private double limiteSuperior, limiteInferior;
+    private double limiteSuperior, limiteInferior; //limites de calificacion
     private double meta;
     private DefaultListModel<Materia> materias = new DefaultListModel<Materia>();
 
@@ -72,7 +72,7 @@ public class Semestre {
                 suma += materias.getElementAt(i).getCreditos() * materias.getElementAt(i).getPromedio();
 
                 // la sugiente linea de codigo suma el total de creditos
-                totalCreditos = materias.getElementAt(i).getCreditos();
+                totalCreditos += materias.getElementAt(i).getCreditos();
             }
             return suma / totalCreditos;
         } else {

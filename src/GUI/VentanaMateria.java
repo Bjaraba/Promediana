@@ -88,7 +88,7 @@ public class VentanaMateria extends javax.swing.JFrame {
         if ((1 - sumPorcentaje) == 0 && (meta - promedio) == 0) {
             analisis = "<html>Felicitaciones has alcazado tu meta</html>";
         } else if ((1 - sumPorcentaje) > 0 && (meta -  promedio) < 0){
-            analisis = "<html>WOW! alcanzate tu meta inclus antes del porcentaje total"; 
+            analisis = "<html>WOW! alcanzate tu meta incluso antes del porcentaje total"; 
         } else if ((1 - sumPorcentaje) == 0) {
             analisis = "<html>Felicitaciones superaste tu meta </html>";
         } else {
@@ -97,7 +97,6 @@ public class VentanaMateria extends javax.swing.JFrame {
             porcentajeFaltante = String.valueOf((1 - sumPorcentaje) * 100);
             analisis = "<html>Necesitas sacar una nota de " + notaFaltanteString
                     + " con un porcentaje de " + porcentajeFaltante + "% para alcanzar tu meta</html>";
-
         }
 
         return analisis;
