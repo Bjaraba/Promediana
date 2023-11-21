@@ -418,12 +418,11 @@ public class VentanaSemestre extends javax.swing.JFrame {
         if (txtLimiteInferior.getText().equalsIgnoreCase("") || txtLimiteSuperior.getText().equalsIgnoreCase("") || txtMeta.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Promediana no funcionara sin los limites de calificacion ni con la meta");
 
-        } else if (txtLimiteSuperior.getText().equalsIgnoreCase("0") || txtMeta.getText().equals("0")) {
+        } else if (txtLimiteSuperior.getText().equalsIgnoreCase("0") || txtMeta.getText().equals("0") || txtLimiteSuperior.getText().equalsIgnoreCase("0.0") || txtMeta.getText().equals("0.0") ) {
             JOptionPane.showMessageDialog(rootPane, "Promediana no funcionara con limite superior de calificacion ni con meta iguales a 0");
 
         } else {
             ventanaNuevaMateria = new VentanaNuevaMateria(semestre);
-
             ventanaNuevaMateria.setVisible(true);
             ventanaNuevaMateria.setLocationRelativeTo(null);
             this.dispose();
