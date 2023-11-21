@@ -39,7 +39,11 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
         initComponents();
         this.semestre = semestre;
         this.indiceMateria = indiceMateria;
-
+        
+        // se ponen en los espoacios de texto el nombre y los creditos antes ingresados
+        txtCreditosNuevaMateria.setText(String.valueOf(semestre.getMaterias().getElementAt(indiceMateria).getCreditos()));
+        txtNombreNuevaMateria.setText(semestre.getMaterias().getElementAt(indiceMateria).getNombre());
+        
         // se editan los textos con el fin de que sean coherentes con la acción 
         // que se esta realizando (Editar una materia)
         lblNombre.setText("Edite el nombre del la materia");
@@ -170,7 +174,8 @@ public class VentanaNuevaMateria extends javax.swing.JFrame {
                     
                     //de lo cotrario se editara la materia en el indice indicado
                 } else {
-                    semestre.getMaterias().setElementAt(nuevaMateria, indiceMateria);
+                    semestre.getMaterias().getElementAt(indiceMateria).setNombre(txtNombreNuevaMateria.getText());
+                    semestre.getMaterias().getElementAt(indiceMateria).setCreditos(Integer.parseInt(txtCreditosNuevaMateria.getText()));
                 }
 
                 //se pasa el semestre a la venta pricipal

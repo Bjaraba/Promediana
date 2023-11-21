@@ -41,14 +41,19 @@ public class VentanaNuevaNota extends javax.swing.JFrame {
     //constructor que solo se utlizara para editar una nota
     public VentanaNuevaNota(Semestre semestre, int indexMateria, int indexNota) {
         initComponents();
-
+        
+        //se agregan a los campos de texto los valores antes puestos por el usuario
+        txtCalificacionNuevaNota.setText(String.valueOf(semestre.getMaterias().getElementAt(indexMateria).getNotas().getElementAt(indexNota).getCalificacion()));
+        txtNombreNuevaNota.setText(String.valueOf(semestre.getMaterias().getElementAt(indexMateria).getNotas().getElementAt(indexNota).getNombre()));
+        txtPorcentajeNuevaNota.setText(String.valueOf(semestre.getMaterias().getElementAt(indexMateria).getNotas().getElementAt(indexNota).getPorcentaje() * 100));
+        
         // se editan los textos de manera que sea mas consecuente con la accion
         // que se esta realizndo (Editar una Nota)
         lblNombre.setText("Edite el nombre de la nota");
         lblProcentaje.setText("Edite el porcentaje");
         lblCalificacion.setText("Edite su calificacion");
 
-        this.index = index;
+        this.index = indexMateria;
 
         //se cambian los valores de la materia vacia a los de la materia seleccionada
         this.materia = semestre.getMaterias().getElementAt(index);

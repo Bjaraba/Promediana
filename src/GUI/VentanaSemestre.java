@@ -430,13 +430,13 @@ public class VentanaSemestre extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNuevaMateriaActionPerformed
 
     private void jListMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListMateriaMouseClicked
-        int indice = jListMateria.getSelectedIndex();
+        int indiceMateria = jListMateria.getSelectedIndex();
 
         // verificar el doble clik
         // la materia solo se abrirá si ha dado doble clik ecima del nombre de la materia
         if (evt.getClickCount() == 2) {
             //contructor y hacer visible
-            ventanaMateria = new VentanaMateria(semestre, indice);
+            ventanaMateria = new VentanaMateria(semestre, indiceMateria);
             ventanaMateria.setVisible(true);
             ventanaMateria.setLocationRelativeTo(null);
 
@@ -444,8 +444,9 @@ public class VentanaSemestre extends javax.swing.JFrame {
             this.dispose();
 
             // si se selecciona una materia y se da doble clik  
-        } else if (SwingUtilities.isRightMouseButton(evt) && indice != -1) {
-            ventanaNuevaMateria = new VentanaNuevaMateria(semestre, indice);
+        } else if (SwingUtilities.isRightMouseButton(evt) && indiceMateria != -1) {
+            //se eedita la materia en cuestion
+            ventanaNuevaMateria = new VentanaNuevaMateria(semestre, indiceMateria);
             ventanaNuevaMateria.setVisible(true);
             ventanaNuevaMateria.setLocationRelativeTo(null);
 
